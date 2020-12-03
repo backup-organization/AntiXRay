@@ -1,0 +1,27 @@
+---
+#
+#                 _   ___   _______             
+#     /\         | | (_) \ / /  __ \            
+#    /  \   _ __ | |_ _ \ V /| |__) |__ _ _   _ 
+#   / /\ \ | '_ \| __| | > < |  _  // _` | | | |
+#  / ____ \| | | | |_| |/ . \| | \ \ (_| | |_| |
+# /_/    \_\_| |_|\__|_/_/ \_\_|  \_\__,_|\__, |
+#                                          __/ |
+#                                         |___/ 
+# Config file for AntiXRay by kenygamer - https://kenygamer.us.to/discord
+# In this config you can change how some things of AntiXRay work.
+
+# height-min: Set the minimum height that AntiXRay will be checking for.
+# Default: 0
+height-min: 0
+
+# height-max: Set the minimum height that AntiXRay will be checking for.
+# Default: 53
+height-max: 53
+
+# hide-ores: Should Anti-Xray hide ores within reach distance?
+hide-ores: true
+
+# hide-chunks: Should Anti-Xray hide entire chunks? (Useful for underground builds)
+hide-chunks: true
+... 

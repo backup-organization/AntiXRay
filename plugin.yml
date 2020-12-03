@@ -1,0 +1,12 @@
+name: AntiXRay
+main: kenygamer\AntiXRay\Main
+api: 3.9.0
+version: 1.0.0
+load: POSTWORLD
+author: kenygamer
+description: A plugin that allows you to stop X-Ray hacks on your server.
+
+permissions:
+  antixray.bypass:
+    description: "Allows bypass Anti X-Ray system."
+    default: false
