@@ -1,0 +1,8 @@
+--- # Poggit-CI Manifest. Open the CI at https://poggit.pmmp.io/ci/kenygamer/AntiXRay
+build-by-default: true
+branches:
+- master
+projects:
+  AntiXRay:
+    path: ""
+...
