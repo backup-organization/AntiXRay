@@ -102,16 +102,13 @@ final class ChunkRequestTask extends AsyncTask{
 	 * @param int $chunkZ
 	 * @param int $levelId
 	 * @param string $username
-	 * @param int $heightMin
-	 * @param int $heightMax
-	 * @param bool $hideOres
-	 * @param bool $hideChunks
-	 * @param int $maxDist
 	 */
-	public function __construct(int $chunkX, int $chunkZ, int $levelId, string $username, int $heightMin, int $heightMax, bool $hideOres, bool $hideChunks, int $maxDist){
+	public function __construct(int $chunkX, int $chunkZ, int $levelId, string $username){
+		$plugin = Main::getInstance();
+		[$this->heightMin, $this->heightMax, $this->hideOres, $this->hideChunks, $this->maxDist] = [$plugin->heightMin, $plugin->heightMax, $plugin->hideOres, $plugin->hideChunks, $plugin->maxDist];
+		
 		$this->chunkX = $chunkX;
 		$this->chunkZ = $chunkZ;
-		$this->maxDist = $maxDist;
 		$this->cacheEnabled = false;
 		$this->usedBlobHashes = [];
 		
@@ -133,24 +130,17 @@ final class ChunkRequestTask extends AsyncTask{
 		$this->playerChunkX = ($this->playerX = $player->getX()) >> 4;
 		$this->playerChunkZ = ($this->playerZ = $player->getZ()) >> 4;
 		$this->playerSubChunk = $player->getY() >> 4;
-		$this->maxDist = $maxDist;
 		
 		$this->username = $username;
 		$this->levelId = $levelId;
 		
 		$biome = $level->getBiome($chunkX, $chunkZ);
-		if($heightMin < 0){
+		if($this->heightMin < 0){
 			$this->heightMin = 0;
-		}else{
-			$this->heightMin = $heightMin;
 		}
-		if($heightMax < 0){
+		if($this->heightMax < 0){
 			$this->heightMax = $biome->getMinElevation();
-		}else{
-			$this->heightMax = $heightMax;
 		}
-		$this->hideOres = $hideOres;
-		$this->hideChunks = $hideChunks;
 	}
 	
 	/**
@@ -162,7 +152,7 @@ final class ChunkRequestTask extends AsyncTask{
 	 *
 	 * @return bool
 	 */
-	public function isViewable(int $x, int $y, int $z) : bool{
+	public function isPosViewable(int $x, int $y, int $z) : bool{
 		$subChunk = $y >> 4;
 		if($subChunk < 0 xor $subChunk > 15){
 			throw new \OutOfBoundsException("Subchunk must be between 0 and 15");
@@ -219,7 +209,7 @@ final class ChunkRequestTask extends AsyncTask{
 			for($y = $this->heightMin; $y < $this->heightMax; $y++){
 				for($z = 0; $z < 16; $z++){	
 					
-					if(!$this->isViewable($x, $y, $z)){
+					if(!$this->isPosViewable($x, $y, $z)){
 						
 						if($this->hideOres){
 							$block = $chunk->getBlockId($x, $y, $z);

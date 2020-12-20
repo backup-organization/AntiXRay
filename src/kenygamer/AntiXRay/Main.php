@@ -58,8 +58,18 @@ final class Main extends PluginBase{
 	/** @vsar int */
 	public $maxDist = 16;
 	
+	/** @var self|null */
+	private static $instance = null;
+	
 	/**
 	 * Called when the plugin loads.
+	 */
+	public function onLoad() : void{
+		self::$instance = $this;
+	}
+	
+	/**
+	 * Called when the plugin enables.
 	 */
 	public function onEnable() : void{
 		$this->saveResource("config.yml", true);
@@ -69,6 +79,13 @@ final class Main extends PluginBase{
 		}else{
 			$this->listener = new EventListener($this);
 		}
+	}
+	
+	/*
+	 * @return self|null
+	 */
+	public static function getInstance() : ?self{
+		return self::$instance;
 	}
 	
 	/**

@@ -156,7 +156,7 @@ final class EventListener implements Listener{
 	private function updateChunk(int $chunkX, int $chunkZ, Player $player) : void{
 		$this->plugin->getServer()->getAsyncPool()->submitTask(
 			new ChunkRequestTask(
-				$chunkX, $chunkZ, $player->getLevel()->getId(), $player->getName(), $this->plugin->heightMin, $this->plugin->heightMax, $this->plugin->hideOres, $this->plugin->hideChunks, $this->plugin->maxDist
+				$chunkX, $chunkZ, $player->getLevel()->getId(), $player->getName()
 			)
 		);
 	}
