@@ -51,7 +51,7 @@ final class Main extends PluginBase{
 	public $heightMin = -1;
 	/** @var int */
 	public $heightMax = -1;
-	/** @var int */
+	/** @var bool */
 	public $hideOres = false;
 	/** @var bool */
 	public $hideChunks = true;
@@ -76,9 +76,9 @@ final class Main extends PluginBase{
 		if(!$this->loadConfig()){
 			$this->getLogger()->critical("Plugin configuration is not correctly set up. Check the main repository for reference or let the plugin regenerate the default configuration deleting the existing one.");
 			$this->getServer()->getPluginManager()->disablePlugin($this);
-		}else{
-			$this->listener = new EventListener($this);
+			return;
 		}
+		$this->listener = new EventListener($this);
 	}
 	
 	/*
@@ -106,8 +106,7 @@ final class Main extends PluginBase{
 			($this->heightMin = $this->getConfigKey("height-min", "int")) === null ||
 			($this->heightMax = $this->getConfigKey("height-max", "int")) === null ||
 			($this->hideOres = $this->getConfigKey("hide-ores", "bool")) === null ||
-			($this->hideChunks = $this->getConfigKey("hide-chunks", "bool")) === null /*||
-			$this->maxDist = $this->getConfigKey("max-dist", "int")) === null*/
+			($this->hideChunks = $this->getConfigKey("hide-chunks", "bool")) === null
 		){
 			return false;
 		}
